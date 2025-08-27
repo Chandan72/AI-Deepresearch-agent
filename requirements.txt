@@ -1,0 +1,19 @@
+# requirements.txt
+langgraph==0.2.49
+langchain==0.3.7
+langchain-community==0.3.5
+langchain-openai==0.2.8
+langchain-tavily==0.2.0
+langchain-chroma==0.1.4
+pydantic==2.10.2
+fastapi==0.115.4
+uvicorn==0.32.0
+python-dotenv==1.0.1
+requests==2.32.3
+beautifulsoup4==4.12.3
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.9
+redis==5.2.0
+
+# Install dependencies
+
