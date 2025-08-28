@@ -19,12 +19,12 @@ class Config:
     TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))
     
     # Research Configuration
-    MAX_SEARCH_RESULTS = int(os.getenv("MAX_SEARCH_RESULTS", "5"))
-    MAX_RESEARCH_ITERATIONS = int(os.getenv("MAX_RESEARCH_ITERATIONS", "2"))
-    QUALITY_THRESHOLD = float(os.getenv("QUALITY_THRESHOLD", "0.4"))
-    MIN_SOURCES_REQUIRED=int(os.getenv("MIN_SOURCES_REQUIRED","3"))
+    MAX_SEARCH_RESULTS = int(os.getenv("MAX_SEARCH_RESULTS", "10"))
+    MAX_RESEARCH_ITERATIONS = int(os.getenv("MAX_RESEARCH_ITERATIONS", "3"))
+    QUALITY_THRESHOLD = float(os.getenv("QUALITY_THRESHOLD", "0.6"))
+    MIN_SOURCES_REQUIRED=int(os.getenv("MIN_SOURCES_REQUIRED","5"))
     REQUEST_TIMEOUT=int(os.getenv("REQUEST_TIMEOUT", "60"))
-    MAX_CONTENT_LENGTH= int(os.getenv("MAX_CONTENT_LENGTH", "5000"))
+    MAX_CONTENT_LENGTH= int(os.getenv("MAX_CONTENT_LENGTH", "7000"))
     
     # Deployment
     HOST = os.getenv("HOST", "0.0.0.0")

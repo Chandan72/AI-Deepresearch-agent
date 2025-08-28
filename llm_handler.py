@@ -65,7 +65,7 @@ class LLMHandler:
                 return await self._create_fallback_report(query, research_data)
             
             # Limit input data to prevent token overflow
-            limited_data = research_data[:3]  # Only use first 3 sources
+            limited_data = research_data[:4]  # Only use first 3 sources
             
             if not limited_data:
                 logger.warning("⚠️ No research data available")
@@ -83,10 +83,10 @@ class LLMHandler:
 
 Structure:
 1. Executive Summary (2-3 sentences)
-2. Key Findings (3-5 bullet points)  
+2. Key Findings (5-7 bullet points)  
 3. Conclusions (1-2 sentences)
 
-Keep the report under 500 words. Use [1], [2], [3] for citations.
+Keep the report under 500 words. Use [1], [2], [3], [4] for citations.
 Be factual and concise."""),
                 ("human", """Topic: {query}
 
@@ -113,12 +113,12 @@ Generate a research report.""")
                 
                 # **CRITICAL FIX** - Check if response is None
                 if response is None:
-                    logger.error("❌ OpenAI API returned None response")
+                    logger.error("❌ Google-Gemini API returned None response")
                     return await self._create_fallback_report(query, limited_data)
                 
                 # **CRITICAL FIX** - Check if response has content
                 if not hasattr(response, 'content') or not response.content:
-                    logger.error("❌ OpenAI response missing content")
+                    logger.error("❌ Google-Gemini response missing content")
                     return await self._create_fallback_report(query, limited_data)
                 
                 # Track token usage safely
@@ -134,10 +134,10 @@ Generate a research report.""")
                 logger.info("✅ Report generated successfully")
                 
             except asyncio.TimeoutError:
-                logger.error("❌ OpenAI API timeout")
+                logger.error("❌ Google-Gemini API timeout")
                 return await self._create_fallback_report(query, limited_data)
             except Exception as api_error:
-                logger.error(f"❌ OpenAI API error: {api_error}")
+                logger.error(f"❌ Google-Gemini API error: {api_error}")
                 return await self._create_fallback_report(query, limited_data)
             
             # Create citations
@@ -154,7 +154,7 @@ Generate a research report.""")
         try:
             formatted_parts = []
             
-            for idx, item in enumerate(research_data[:3], 1):
+            for idx, item in enumerate(research_data[:4], 1):
                 try:
                     title = str(item.get('title', 'No title'))[:80]
                     content = str(item.get('content', 'No content'))[:300]
@@ -205,7 +205,7 @@ Research was conducted on "{query}" using automated web search. {len(data)} sour
 """
         
         # Add findings from sources
-        for idx, item in enumerate(data[:3], 1):
+        for idx, item in enumerate(data[:4], 1):
             try:
                 title = str(item.get('title', 'Source'))[:60]
                 content = str(item.get('content', ''))[:200]
