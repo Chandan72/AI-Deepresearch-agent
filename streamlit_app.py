@@ -1,13 +1,18 @@
 import streamlit as st
 import requests
 import json
+import os
+
+BACKEND_URL="http://localhost:8000"
 
 st.title("🔬 AI Research Agent")
 st.markdown("Get comprehensive research reports on any topic!")
 
+st.sidebar.write(f"🌏 Backend: {BACKEND_URL}")
+
 # Input form
 query = st.text_input("What would you like to research?", 
-                     placeholder="e.g., Latest developments in quantum computing")
+                     placeholder="e.g., Latest developments in AI")
 
 if st.button("Start Research", type="primary"):
     if query:
